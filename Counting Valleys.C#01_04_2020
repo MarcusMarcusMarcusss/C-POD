@@ -1,0 +1,94 @@
+Counting Valleys
+
+Complete the countingValleys function in the editor below. It must return an integer that denotes the number of valleys Gary traversed.
+
+countingValleys has the following parameter(s):
+
+n: the number of steps Gary takes
+s: a string describing his path
+
+Input Format
+
+The first line contains an integer n, the number of steps in Gary's hike.
+The second line contains a single string s, of n characters that describe his path.
+
+Output Format
+
+Print a single integer that denotes the number of valleys Gary walked through during his hike.
+Sample Input
+
+8
+UDDDUDUU
+Sample Output
+
+1
+Explanation
+
+If we represent _ as sea level, a step up as /, and a step down as \, Gary's hike can be drawn as:
+
+_/\      _
+   \    /
+    \/\/
+He enters and leaves one valley.
+
+
+
+
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Collections;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
+using System.Text;
+using System;
+
+class Solution {
+
+    // Complete the countingValleys function below.
+    static int countingValleys(int n, string s) {
+       int elevation=0;
+       int Counting=0;
+
+       bool checkAboveSeaLevel=true;
+
+       foreach(char i in s){
+           if (i == 'D')
+            elevation--;
+           else
+            elevation++;
+
+            //counting
+            if(elevation < 0 && checkAboveSeaLevel ==true){
+                    Counting++;
+                    checkAboveSeaLevel=false;
+            }
+            else if(elevation>=0 && checkAboveSeaLevel ==false){
+                checkAboveSeaLevel=true;
+            }
+       }
+
+        return Counting;
+
+    }
+
+    static void Main(string[] args) {
+        TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int n = Convert.ToInt32(Console.ReadLine());
+
+        string s = Console.ReadLine();
+
+        int result = countingValleys(n, s);
+
+        textWriter.WriteLine(result);
+
+        textWriter.Flush();
+        textWriter.Close();
+    }
+}
